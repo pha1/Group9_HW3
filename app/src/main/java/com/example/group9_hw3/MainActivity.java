@@ -24,7 +24,7 @@ import com.example.group9_hw3.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BacCalculatorFragment.IListener, AddDrinkFragment.IListener, ViewDrinksFragment.IListener, SetProfileFragment.IListener{
 
     ActivityMainBinding binding;
 
@@ -215,5 +215,12 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.addDrinkButton).setEnabled(true);
             }
         }
+    }
+
+    @Override
+    public void changeFragmentListener(String fragment) {
+        // Similar to InClass04 where we obtain the String name of the fragment
+        // and replace the current one
+        // Call any methods necessary when creating
     }
 }

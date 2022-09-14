@@ -1,16 +1,34 @@
+/**
+ * Homework 3
+ * Group9_HW3
+ * Phi Ha
+ * Srinath Dittakavi
+ */
+
 package com.example.group9_hw3;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.example.group9_hw3.databinding.FragmentAddDrinkBinding;
+
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,14 +37,17 @@ import com.example.group9_hw3.databinding.FragmentAddDrinkBinding;
  */
 public class AddDrinkFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM_TITLE = "TITLE";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String title;
+    public static double alcohol_percentage = 0;
+    public static int drinkSize;
+    final public static String ADD_DRINK_KEY = "ADD_DRINK";
+
+    Calendar calendar;
+    SimpleDateFormat simpleDateFormat;
+    String date;
 
     public AddDrinkFragment() {
         // Required empty public constructor
@@ -36,16 +57,13 @@ public class AddDrinkFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param title Parameter 1.
      * @return A new instance of fragment AddDrinkFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static AddDrinkFragment newInstance(String param1, String param2) {
+    public static AddDrinkFragment newInstance(String title) {
         AddDrinkFragment fragment = new AddDrinkFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM_TITLE, title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -54,8 +72,7 @@ public class AddDrinkFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            title = getArguments().getString(ARG_PARAM_TITLE);
         }
     }
 
@@ -70,9 +87,106 @@ public class AddDrinkFragment extends Fragment {
         return binding.getRoot();
     }
 
+    SeekBar seekBar;
+    TextView progress;
+    RadioGroup drink_size_group;
+
     // Function codes go here
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // SEEKBAR/ALCOHOL PERCENTAGE
+        //seekBar = binding.seekBar;
+        //progress = binding.viewProgress;
+
+        //drink_size_group = binding.drink_size_group;
+        drinkSize = 1;
+
+        // When the user clicks on a new size, the drink size is updated
+        drink_size_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+                // If 1 oz is checked
+                if (checkedId == R.id.one_oz){
+                    drinkSize = 1;
+                }
+                // If 5 oz is checked
+                else if (checkedId == R.id.five_oz){
+                    drinkSize = 5;
+                }
+                // If 12 oz is checked
+                else if (checkedId == R.id.twelve_oz){
+                    drinkSize = 12;
+                }
+            }
+        });
+
+        // Initiate the text value for the progress
+        progress.setText("0%");
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            // As the seekbar is used, the percentage displayed is updated
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                progress.setText(i + "%");
+                alcohol_percentage = (double)i/100.0;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        /*
+        binding.addDrinkButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                calendar = Calendar.getInstance();
+                simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa");
+                date = simpleDateFormat.format(calendar.getTime());
+                Log.d("TEST", "onClick: " + date);
+
+                // Create Drink object with selected data
+                Drink drink = new Drink(alcohol_percentage, drinkSize, date);
+
+                // TODO send the drink object to the Main Activity to store in list
+                // TODO Retrieve BAC Calculator Fragment from the back stack using tag, send the new updated list
+                // TODO Pop the back stack
+            }
+        });
+         */
+
+        /*
+        binding.cancelButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // TODO Make String XML Value for Add Drink fragment
+                mListener.changeFragmentListener(getResources.getString.());
+            }
+        });
+         */
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof BacCalculatorFragment.IListener){
+            mListener = (AddDrinkFragment.IListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + "must implement IListener");
+        }
+    }
+
+    IListener mListener;
+
+    public interface IListener{
+        void changeFragmentListener(String fragment);
     }
 }

@@ -72,7 +72,7 @@ public class SetProfileActivity extends AppCompatActivity {
         });
 
         // Close Set Profile Activity without any information
-        findViewById(R.id.setWeight2).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.cancelSetProfile).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {finish();}
         });

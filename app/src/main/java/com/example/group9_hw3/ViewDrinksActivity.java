@@ -140,6 +140,5 @@ public class ViewDrinksActivity extends AppCompatActivity {
 
         date = findViewById(R.id.textViewDateTime);
         date.setText(drink.date);
-
     }
 }

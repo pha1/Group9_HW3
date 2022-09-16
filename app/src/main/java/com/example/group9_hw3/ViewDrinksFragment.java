@@ -42,6 +42,7 @@ public class ViewDrinksFragment extends Fragment {
     public static ArrayList<Drink> drinks = new ArrayList<Drink>();
     public int current = 0;
     public Drink drink = new Drink();
+    public Drink removedDrink = new Drink();
 
     TextView currentDrink;
     TextView totalDrinks;
@@ -60,8 +61,7 @@ public class ViewDrinksFragment extends Fragment {
      * @param drinks_list Parameter 1.
      * @return A new instance of fragment ViewDrinkFragment.
      */
-    // TODO: Rename and change types and number of parameters
-    public static ViewDrinksFragment newInstance(ArrayList<Drink> drinks_list, String param2) {
+    public static ViewDrinksFragment newInstance(ArrayList<Drink> drinks_list) {
         ViewDrinksFragment fragment = new ViewDrinksFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList(ARG_PARAM_DRINKS, drinks_list);
@@ -114,15 +114,14 @@ public class ViewDrinksFragment extends Fragment {
             }
         });
 
-        // TODO Remove the current drink from this drink list
-        // TODO Send the drink back to the Main Activity and delete it there too
-        // TODO Do not change fragments while doing this
         // Click the trash icon to delete the current drink and then show the previous drink
         binding.trashButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Remove the current drink
-                drinks.remove(current);
+                // Remove the current drink, send and delete it from Main Activity
+                removedDrink = drinks.remove(current);
+                mListener.deleteDrink(removedDrink);
+
                 Log.d("TEST", "onClick: Number of drinks: " + drinks.size());
 
                 // If there are drinks in the list
@@ -141,7 +140,7 @@ public class ViewDrinksFragment extends Fragment {
                 }
                 // If there are no drinks in the list
                 else {
-                    // TODO Send the data back to MainActivity
+                    mListener.emptyList(drinks);
                 }
 
             }
@@ -171,10 +170,7 @@ public class ViewDrinksFragment extends Fragment {
         binding.closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Make the Title of each Action Bar a String XML Value!
-                mListener.changeFragmentListener(getResources.getString.(R.string.);
-                // TODO Send updated ArrayList<Drink> drinks back to MainActivity
-                // TODO The Main Activity does this - Implement with interface
+                mListener.closeViewDrinks(drinks);
             }
         });
 
@@ -199,6 +195,7 @@ public class ViewDrinksFragment extends Fragment {
         date = binding.textViewDateTime;
         date.setText(drink.date);
     }
+
      */
 
     @Override
@@ -216,5 +213,8 @@ public class ViewDrinksFragment extends Fragment {
     public interface IListener{
         // For closing the View Drinks fragment
         void changeFragmentListener(String fragment);
+        void deleteDrink(Drink drink);
+        void emptyList(ArrayList<Drink> drinks);
+        void closeViewDrinks(ArrayList<Drink> drinks);
     }
 }

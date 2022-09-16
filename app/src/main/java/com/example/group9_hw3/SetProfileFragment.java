@@ -23,8 +23,9 @@ import com.example.group9_hw3.databinding.FragmentSetProfileBinding;
 public class SetProfileFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM_PROFILE = "profile";
+    private static final String ARG_PARAM_TITLE = "title";
 
+    private String title;
     private Profile profile = new Profile();
     private String gender;
 
@@ -36,13 +37,13 @@ public class SetProfileFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param profile Parameter 1.
+     * @param title The title of the Fragment
      * @return A new instance of fragment SetProfileFragment.
      */
-    public static SetProfileFragment newInstance(Profile profile) {
+    public static SetProfileFragment newInstance(String title) {
         SetProfileFragment fragment = new SetProfileFragment();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_PARAM_PROFILE, profile);
+        args.putString(ARG_PARAM_TITLE, title);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +52,7 @@ public class SetProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            profile = getArguments().getParcelable(ARG_PARAM_PROFILE);
+            title = getArguments().getString(ARG_PARAM_TITLE);
         }
     }
 
@@ -73,6 +74,8 @@ public class SetProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        getActivity().setTitle(title);
 
         // default gender selection
         gender = "Female";
@@ -121,10 +124,8 @@ public class SetProfileFragment extends Fragment {
          */
 
         // On Click Listener for Cancel
-        //binding.cancelSetProfile
-        // TODO interface that has a "Cancel Method"
-        //  On Click pop stack method, create a String XML for SetProfile
-        // mListener.changeFragmentListener(getResources.getString.());
+        // TODO binding.cancelSetProfile
+        // TODO mListener.cancel();
     }
 
     @Override
@@ -142,5 +143,7 @@ public class SetProfileFragment extends Fragment {
     public interface IListener{
         // For canceling the Set Profile fragment
         void changeFragmentListener(String fragment);
+        void sendProfile(Profile profile);
+        void cancel();
     }
 }

@@ -96,6 +96,8 @@ public class AddDrinkFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getActivity().setTitle(title);
+
         // SEEKBAR/ALCOHOL PERCENTAGE
         //seekBar = binding.seekBar;
         //progress = binding.viewProgress;
@@ -156,9 +158,8 @@ public class AddDrinkFragment extends Fragment {
                 // Create Drink object with selected data
                 Drink drink = new Drink(alcohol_percentage, drinkSize, date);
 
-                // TODO send the drink object to the Main Activity to store in list
-                // TODO Retrieve BAC Calculator Fragment from the back stack using tag, send the new updated list
-                // TODO Pop the back stack
+                // Send the drink to Main Activity
+                mListener.sendDrink(drink);
             }
         });
          */
@@ -167,8 +168,7 @@ public class AddDrinkFragment extends Fragment {
         binding.cancelButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO Make String XML Value for Add Drink fragment
-                mListener.changeFragmentListener(getResources.getString.());
+                mListener.cancel();
             }
         });
          */
@@ -188,5 +188,7 @@ public class AddDrinkFragment extends Fragment {
 
     public interface IListener{
         void changeFragmentListener(String fragment);
+        void sendDrink(Drink drink);
+        void cancel();
     }
 }

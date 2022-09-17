@@ -108,7 +108,18 @@ public class BacCalculatorFragment extends Fragment {
 
         numDrinkDisplay.setText("0");
 
-        bacLevel.setText(String.valueOf(bac));
+        if (bac == 0.0){
+            bacLevel.setText(getResources().getString(R.string.BAC_num));
+        } else {
+            bacLevel.setText(String.valueOf(bac));
+        }
+
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.changeFragmentListener("Set Profile");
+            }
+        });
 
         //
         binding.viewDrinksButton.setOnClickListener(new View.OnClickListener() {
@@ -137,8 +148,6 @@ public class BacCalculatorFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(getResources().getString(R.string.app_name));
-        bac = calculateBAC(profile, drinks);
-        updateBacUI(bac);
     }
 
     @Override

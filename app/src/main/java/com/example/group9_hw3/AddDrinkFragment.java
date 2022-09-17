@@ -99,10 +99,10 @@ public class AddDrinkFragment extends Fragment {
         getActivity().setTitle(title);
 
         // SEEKBAR/ALCOHOL PERCENTAGE
-        //seekBar = binding.seekBar;
-        //progress = binding.viewProgress;
+        seekBar = binding.seekBar;
+        progress = binding.viewProgress;
 
-        //drink_size_group = binding.drink_size_group;
+        drink_size_group = binding.drinkSizeGroup;
         drinkSize = 1;
 
         // When the user clicks on a new size, the drink size is updated
@@ -146,7 +146,6 @@ public class AddDrinkFragment extends Fragment {
             }
         });
 
-        /*
         binding.addDrinkButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,16 +161,13 @@ public class AddDrinkFragment extends Fragment {
                 mListener.sendDrink(drink);
             }
         });
-         */
 
-        /*
         binding.cancelButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.cancel();
             }
         });
-         */
     }
 
     @Override
@@ -187,7 +183,6 @@ public class AddDrinkFragment extends Fragment {
     IListener mListener;
 
     public interface IListener{
-        void changeFragmentListener(String fragment);
         void sendDrink(Drink drink);
         void cancel();
     }

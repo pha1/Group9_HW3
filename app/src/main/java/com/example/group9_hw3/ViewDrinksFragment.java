@@ -93,7 +93,6 @@ public class ViewDrinksFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        /*
         // Click next to get the next drink in the ArrayList
         // If the current drink is the last drink then show the first drink next
         binding.nextButton.setOnClickListener(new View.OnClickListener() {
@@ -173,11 +172,8 @@ public class ViewDrinksFragment extends Fragment {
                 mListener.closeViewDrinks(drinks);
             }
         });
-
-         */
     }
 
-    /*
     public void updateUI(){
 
         currentDrink = binding.textviewCurrentDrink;
@@ -196,8 +192,6 @@ public class ViewDrinksFragment extends Fragment {
         date.setText(drink.date);
     }
 
-     */
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -211,8 +205,6 @@ public class ViewDrinksFragment extends Fragment {
     IListener mListener;
 
     public interface IListener{
-        // For closing the View Drinks fragment
-        void changeFragmentListener(String fragment);
         void deleteDrink(Drink drink);
         void emptyList(ArrayList<Drink> drinks);
         void closeViewDrinks(ArrayList<Drink> drinks);

@@ -106,14 +106,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RadioGroup
-        android:id="@+id/gender_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/gender"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gender"
-        app:layout_constraintTop_toTopOf="@+id/gender"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

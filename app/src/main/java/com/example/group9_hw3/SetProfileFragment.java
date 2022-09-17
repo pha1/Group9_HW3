@@ -7,11 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.group9_hw3.databinding.FragmentSetProfileBinding;
 
@@ -28,6 +30,7 @@ public class SetProfileFragment extends Fragment {
     private String title;
     private Profile profile = new Profile();
     private String gender;
+    private int weight;
 
     public SetProfileFragment() {
         // Required empty public constructor
@@ -80,11 +83,9 @@ public class SetProfileFragment extends Fragment {
         // default gender selection
         gender = "Female";
 
-        // TODO Re-type in the setOnCheckedChangedListener
         // Check to see which radio button is checked
         // and apply the gender to the display
-        /*
-        binding.gender_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        binding.genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
                 if (checkedId == binding.radioFemale){
@@ -95,15 +96,16 @@ public class SetProfileFragment extends Fragment {
                 }
             }
         });
-         */
+
+        editWeight = binding.editWeight;
 
         // On Click Listener for Set
-        //binding.setWeight
-        // TODO This goes inside the OnClick
-        /*
-        try {
+        binding.setWeight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
                     // Check if the value can be parsed into an int
-                    weight = Integer.parseInt(editText.getText().toString());
+                    weight = Integer.parseInt(editWeight.getText().toString());
 
                     // If the number is less than 0, show the Toast message
                     if (weight < 0) {
@@ -113,19 +115,24 @@ public class SetProfileFragment extends Fragment {
                     Profile profile = new Profile(gender, weight);
                     Log.d("TEST", "onClick: Profile created");
 
-                    // TODO Send profile to Main Activity
+                    // Send profile to Main Activity
+                    // mListener.sendProfile(profile);
 
                 } catch (Exception e)
                 {
                     // Toast message when a positive number is not entered
-                    Toast.makeText(SetProfileActivity.this, "Please enter a valid positive" +
+                    Toast.makeText(getActivity(), "Please enter a valid positive" +
                             " number", Toast.LENGTH_SHORT).show();
                 }
-         */
-
+            }
+        });
         // On Click Listener for Cancel
-        // TODO binding.cancelSetProfile
-        // TODO mListener.cancel();
+        binding.cancelSetProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.cancel();
+            }
+        });
     }
 
     @Override
@@ -141,8 +148,6 @@ public class SetProfileFragment extends Fragment {
     IListener mListener;
 
     public interface IListener{
-        // For canceling the Set Profile fragment
-        void changeFragmentListener(String fragment);
         void sendProfile(Profile profile);
         void cancel();
     }

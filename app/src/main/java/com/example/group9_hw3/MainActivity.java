@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
     public void emptyList(ArrayList<Drink> drinks) {
         bacCalculator = (BacCalculatorFragment) getSupportFragmentManager().findFragmentByTag("BAC Calculator Fragment");
         bacCalculator.updateDrinksList(drinks);
+        getSupportFragmentManager().popBackStack();
     }
 
     @Override

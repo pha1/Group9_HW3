@@ -112,16 +112,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <RadioGroup
-        android:id="@+id/drink_size_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/drinkSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/drinkSize"
-        app:layout_constraintTop_toTopOf="@+id/drinkSize"/>
-
     <TextView
         android:id="@+id/drinkSize2"
         android:layout_width="wrap_content"

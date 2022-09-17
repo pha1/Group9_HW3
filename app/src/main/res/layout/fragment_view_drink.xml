@@ -5,4 +5,185 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewDrinksFragment"/>
+    tools:context=".ViewDrinksFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ViewDrinksActivity">
+
+        <TextView
+            android:id="@+id/textviewDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="64dp"
+            android:text="@string/view_drinks_drink"
+            android:textSize="34sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewOutof"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/view_drink_outOf"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textviewCurrentDrink"
+            app:layout_constraintStart_toEndOf="@+id/textviewCurrentDrink"
+            app:layout_constraintTop_toTopOf="@+id/textviewCurrentDrink" />
+
+        <TextView
+            android:id="@+id/textViewTotalDrinks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/view_drink_total"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewOutof"
+            app:layout_constraintStart_toEndOf="@+id/textViewOutof"
+            app:layout_constraintTop_toTopOf="@+id/textViewOutof" />
+
+        <TextView
+            android:id="@+id/textviewCurrentDrink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/view_drinks_x"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textviewDrink"
+            app:layout_constraintStart_toEndOf="@+id/textviewDrink"
+            app:layout_constraintTop_toTopOf="@+id/textviewDrink" />
+
+        <TextView
+            android:id="@+id/textViewAlcohol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_drinks_alcohol"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewPercentage"
+            app:layout_constraintStart_toStartOf="@+id/textviewDrinkSize"
+            app:layout_constraintTop_toTopOf="@+id/textViewPercentage" />
+
+        <TextView
+            android:id="@+id/textViewPercentage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/view_drinks_percent"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toStartOf="@+id/textViewAlcohol"
+            app:layout_constraintTop_toBottomOf="@+id/textviewDrinkSize" />
+
+        <TextView
+            android:id="@+id/textviewOz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/view_drinks_oz"
+            android:textSize="34sp"
+            app:layout_constraintStart_toEndOf="@+id/textviewDrinkSize"
+            app:layout_constraintTop_toTopOf="@+id/textviewDrinkSize" />
+
+        <TextView
+            android:id="@+id/textviewDrinkSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/view_drinks_ozCount"
+            android:textSize="34sp"
+            app:layout_constraintStart_toStartOf="@+id/textviewCurrentDrink"
+            app:layout_constraintTop_toBottomOf="@+id/textviewCurrentDrink" />
+
+        <TextView
+            android:id="@+id/textViewAdded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/view_drinks_added"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toStartOf="@+id/textViewPercentage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPercentage" />
+
+        <TextView
+            android:id="@+id/textViewDateTime"
+            android:layout_width="193dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="16dp"
+            android:text="@string/view_drinks_date"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewAdded"
+            app:layout_constraintStart_toEndOf="@+id/textViewAdded"
+            app:layout_constraintTop_toTopOf="@+id/textViewAdded" />
+
+        <Button
+            android:id="@+id/closeButton"
+            android:layout_width="116dp"
+            android:layout_height="42dp"
+            android:text="@string/view_drinks_close"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.486"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/trashButton" />
+
+        <ImageButton
+            android:id="@+id/trashButton"
+            android:layout_width="68dp"
+            android:layout_height="62dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:scrollbarThumbHorizontal="@drawable/ic_trash"
+            app:layout_constraintBottom_toBottomOf="@+id/previousButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/previousButton"
+            app:srcCompat="@drawable/ic_trash" />
+
+        <ImageButton
+            android:id="@+id/previousButton"
+            android:layout_width="68dp"
+            android:layout_height="62dp"
+            android:layout_marginTop="64dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:scrollbarThumbHorizontal="@drawable/ic_previous"
+            app:layout_constraintEnd_toStartOf="@+id/trashButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewAdded"
+            app:srcCompat="@drawable/ic_previous" />
+
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="68dp"
+            android:layout_height="62dp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:scrollbarThumbHorizontal="@drawable/ic_next"
+            app:layout_constraintBottom_toBottomOf="@+id/trashButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/trashButton"
+            app:layout_constraintTop_toTopOf="@+id/trashButton"
+            app:srcCompat="@drawable/ic_next" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textviewDrink2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/view_drinks_drink"
+        android:textSize="34sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

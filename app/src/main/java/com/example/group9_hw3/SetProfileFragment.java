@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -71,7 +72,6 @@ public class SetProfileFragment extends Fragment {
     }
 
     TextView editWeight;
-    RadioGroup gender_group;
 
     // Function codes go here
     @Override
@@ -88,10 +88,10 @@ public class SetProfileFragment extends Fragment {
         binding.genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-                if (checkedId == binding.radioFemale){
+                if (checkedId == binding.radioFemale.getId()){
                     gender = "Female";
                 }
-                else if (checkedId == binding.radioMale){
+                else if (checkedId == binding.radioMale.getId()){
                     gender = "Male";
                 }
             }
@@ -116,7 +116,7 @@ public class SetProfileFragment extends Fragment {
                     Log.d("TEST", "onClick: Profile created");
 
                     // Send profile to Main Activity
-                    // mListener.sendProfile(profile);
+                    mListener.sendProfile(profile);
 
                 } catch (Exception e)
                 {

@@ -41,9 +41,8 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
         setContentView(binding.getRoot());
         setTitle("BAC Calculator");
 
-        // TODO Bac Calculator Fragment (BCF) is created and added to the RelativeLayout
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.containerView, BacCalculatorFragment.newInstance("BAC Calculator", drinks), "BAC Calculator Fragment")
+                .add(R.id.containerView, BacCalculatorFragment.newInstance("BAC Calculator"), "BAC Calculator Fragment")
                 .addToBackStack(null)
                 .commit();
     }

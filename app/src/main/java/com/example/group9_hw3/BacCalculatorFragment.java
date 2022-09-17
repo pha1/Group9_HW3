@@ -36,7 +36,6 @@ public class BacCalculatorFragment extends Fragment {
 
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM_TITLE = "title";
-    private static final String ARG_PARAM_DRINKS = "drinks";
 
     private String title;
     private Profile profile = new Profile();
@@ -51,14 +50,12 @@ public class BacCalculatorFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param title The title of the Fragment.
-     * @param drinks The Drinks list.
      * @return A new instance of fragment BacCalculatorFragment.
      */
-    public static BacCalculatorFragment newInstance(String title, ArrayList<Drink> drinks) {
+    public static BacCalculatorFragment newInstance(String title) {
         BacCalculatorFragment fragment = new BacCalculatorFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM_TITLE, title);
-        args.putParcelableArrayList(ARG_PARAM_DRINKS, drinks);
         fragment.setArguments(args);
         return fragment;
     }
@@ -68,7 +65,6 @@ public class BacCalculatorFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             title = getArguments().getString(ARG_PARAM_TITLE);
-            drinks = getArguments().getParcelableArrayList(ARG_PARAM_DRINKS);
         }
     }
 

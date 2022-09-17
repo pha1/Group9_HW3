@@ -8,6 +8,8 @@ public class Profile implements Parcelable {
     int weight;
 
     public Profile(){
+        gender = "";
+        weight = 0;
     }
 
     public Profile(String gender, int weight){

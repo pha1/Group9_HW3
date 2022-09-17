@@ -39,7 +39,7 @@ public class BacCalculatorFragment extends Fragment {
 
     private String title;
     private Profile profile = new Profile();
-    private ArrayList<Drink> drinks;
+    private ArrayList<Drink> drinks = new ArrayList<>();
 
     public BacCalculatorFragment() {
         // Required empty public constructor
@@ -93,7 +93,7 @@ public class BacCalculatorFragment extends Fragment {
 
         weightDisplay = binding.weightDisplay;
         numDrinkDisplay = binding.numDrinkDisplay;
-
+        bacLevel = binding.bacLevel;
         String weightGender;
 
         if (profile.weight == 0 && profile.gender.equals("")){
@@ -104,7 +104,9 @@ public class BacCalculatorFragment extends Fragment {
             weightDisplay.setText(weightGender);
         }
 
-        numDrinkDisplay.setText(drinks.size());
+        weightDisplay.setText("N/A");
+
+        numDrinkDisplay.setText("0");
 
         bacLevel.setText(String.valueOf(bac));
 

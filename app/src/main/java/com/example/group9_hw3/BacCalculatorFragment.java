@@ -74,7 +74,8 @@ public class BacCalculatorFragment extends Fragment {
     TextView status;
     TextView bacLevel;
     public static double bac = 0;
-    Boolean unlockButtons = false;
+    Boolean enableViewDrinks = false;
+    Boolean enableAddDrink = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -147,9 +148,12 @@ public class BacCalculatorFragment extends Fragment {
 
         numDrinkDisplay.setText(String.valueOf(drinks.size()));
 
-        if (unlockButtons) {
-            binding.addDrinkButton.setEnabled(true);
+        if (enableViewDrinks) {
             binding.viewDrinksButton.setEnabled(true);
+        }
+
+        if (enableAddDrink) {
+            binding.addDrinkButton.setEnabled(true);
         }
     }
 
@@ -185,8 +189,16 @@ public class BacCalculatorFragment extends Fragment {
         this.drinks = drinks;
     }
 
-    public void unlockButtons(Boolean unlock){
-        this.unlockButtons = unlock;
+    /**
+     * Used to unlock the Add Drink and View Drinks buttons
+     */
+    public void unlockButtons(){
+        this.enableViewDrinks = true;
+        this.enableAddDrink = true;
+    }
+
+        public void enableAddDrinks(Boolean enableAddDrinks){
+        this.enableAddDrink = enableAddDrinks;
     }
 
     /**
@@ -204,6 +216,10 @@ public class BacCalculatorFragment extends Fragment {
         // Disable buttons
         binding.viewDrinksButton.setEnabled(false);
         binding.addDrinkButton.setEnabled(false);
+
+        // Boolean values
+        enableViewDrinks = false;
+        enableAddDrink = false;
 
         clearUI();
         Log.d("TEST", "onClick: clearUI successful");
@@ -279,14 +295,14 @@ public class BacCalculatorFragment extends Fragment {
         if (0 <= bac && bac <= 0.08) {
             status.setText(getResources().getText(R.string.status));
             status.setBackgroundColor(getResources().getColor(R.color.green));
-            binding.addDrinkButton.setEnabled(true);
+            enableAddDrinks(true);
             Log.d("TEST", "updateBacUI: Green successful");
         }
         // Sets the status to "Be careful." and changes the color to orange
         else if (0.08 < bac && bac <= 0.2){
             status.setText(getResources().getText(R.string.status2));
             status.setBackgroundColor(getResources().getColor(R.color.orange));
-            binding.addDrinkButton.setEnabled(true);
+            enableAddDrinks(true);
             Log.d("TEST", "updateBacUI: Orange successful");
         }
 
@@ -299,11 +315,11 @@ public class BacCalculatorFragment extends Fragment {
             // This will disable the "Add Drink" button
             if (bac >= 0.25) {
                 Toast.makeText(getActivity(), "No more drinks for you.", Toast.LENGTH_LONG).show();
-                binding.addDrinkButton.setEnabled(false);
+                enableAddDrinks(false);
                 Log.d("TEST", "updateBacUI: Red successful");
             }
             else {
-                binding.addDrinkButton.setEnabled(true);
+                enableAddDrinks(true);
             }
         }
     }

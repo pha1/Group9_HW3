@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
         this.profile = profile;
         bacCalculator = (BacCalculatorFragment) getSupportFragmentManager().findFragmentByTag("BAC Calculator Fragment");
         bacCalculator.updateProfile(this.profile);
-        bacCalculator.unlockButtons(true);
+        bacCalculator.unlockButtons();
         getSupportFragmentManager().popBackStack();
     }
 

@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.group9_hw3.databinding.FragmentBacCalculatorBinding;
 import com.example.group9_hw3.databinding.FragmentSetProfileBinding;
 
 /**

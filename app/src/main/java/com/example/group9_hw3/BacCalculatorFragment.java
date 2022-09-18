@@ -74,6 +74,7 @@ public class BacCalculatorFragment extends Fragment {
     TextView status;
     TextView bacLevel;
     public static double bac = 0;
+    Boolean unlockButtons = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,25 +95,9 @@ public class BacCalculatorFragment extends Fragment {
         weightDisplay = binding.weightDisplay;
         numDrinkDisplay = binding.numDrinkDisplay;
         bacLevel = binding.bacLevel;
-        String weightGender;
 
-        if (profile.weight == 0 && profile.gender.equals("")){
-            weightDisplay.setText(getResources().getString(R.string.weight_display));
-        }
-        else {
-            weightGender = profile.weight + " lbs (" + profile.gender + ")";
-            weightDisplay.setText(weightGender);
-        }
-
-        weightDisplay.setText("N/A");
-
-        numDrinkDisplay.setText("0");
-
-        if (bac == 0.0){
-            bacLevel.setText(getResources().getString(R.string.BAC_num));
-        } else {
-            bacLevel.setText(String.valueOf(bac));
-        }
+        weightDisplay.setText(getResources().getString(R.string.weight_display));
+        bacLevel.setText(getResources().getString(R.string.BAC_num));
 
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +133,24 @@ public class BacCalculatorFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(getResources().getString(R.string.app_name));
+
+        if (profile.weight > 0){
+            String weightGender;
+            weightGender = profile.weight + " lbs (" + profile.gender + ")";
+            weightDisplay.setText(weightGender);
+        }
+
+        if (drinks.size() > 0) {
+            bac = calculateBAC(profile, drinks);
+            updateBacUI(bac);
+        }
+
+        numDrinkDisplay.setText(String.valueOf(drinks.size()));
+
+        if (unlockButtons) {
+            binding.addDrinkButton.setEnabled(true);
+            binding.viewDrinksButton.setEnabled(true);
+        }
     }
 
     @Override
@@ -180,6 +183,10 @@ public class BacCalculatorFragment extends Fragment {
      */
     public void updateDrinksList(ArrayList<Drink> drinks){
         this.drinks = drinks;
+    }
+
+    public void unlockButtons(Boolean unlock){
+        this.unlockButtons = unlock;
     }
 
     /**
@@ -264,7 +271,7 @@ public class BacCalculatorFragment extends Fragment {
 
         // NUMBER OF DRINKS AND BAC LEVEL
         numDrinks.setText(String.valueOf(drinks.size()));
-        bacLevel.setText(String.valueOf(String.format("%.3f", bac)));
+        bacLevel.setText(String.format("%.3f", bac));
 
         // STATUS MESSAGE
 

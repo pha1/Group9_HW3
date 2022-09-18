@@ -30,10 +30,10 @@
     <string name="view_drinks_drink">Drink</string>
     <string name="view_drinks_x">1</string>
     <string name="view_drink_outOf">out of</string>
-    <string name="view_drink_total">3</string>
+    <string name="view_drink_total">1</string>
     <string name="view_drinks_ozCount">1</string>
     <string name="view_drinks_oz">oz</string>
-    <string name="view_drinks_percent">30</string>
+    <string name="view_drinks_percent">0</string>
     <string name="view_drinks_alcohol">% Alcohol</string>
     <string name="view_drinks_added">Added</string>
     <string name="view_drinks_date">08/30/2022</string>

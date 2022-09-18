@@ -35,11 +35,8 @@ public class ViewDrinksFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM_DRINKS = "drinks_list";
 
-    private String drinks_list;
-
-    public static int numDrinks = 0;
-    final public static String VIEW_DRINKS_KEY = "VIEW_DRINKS";
     public static ArrayList<Drink> drinks = new ArrayList<Drink>();
+
     public int current = 0;
     public Drink drink = new Drink();
     public Drink removedDrink = new Drink();
@@ -73,7 +70,7 @@ public class ViewDrinksFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            drinks_list = getArguments().getString(ARG_PARAM_DRINKS);
+            drinks = getArguments().getParcelableArrayList(ARG_PARAM_DRINKS);
         }
     }
 
@@ -92,6 +89,10 @@ public class ViewDrinksFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Initial Drink display
+        drink = drinks.get(current);
+        updateUI();
 
         // Click next to get the next drink in the ArrayList
         // If the current drink is the last drink then show the first drink next

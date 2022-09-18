@@ -69,11 +69,14 @@ public class BacCalculatorFragment extends Fragment {
     }
 
     FragmentBacCalculatorBinding binding;
+
     TextView weightDisplay;
     TextView numDrinkDisplay;
     TextView status;
     TextView bacLevel;
+
     public static double bac = 0;
+
     Boolean enableViewDrinks = false;
     Boolean enableAddDrink = false;
 
@@ -91,15 +94,18 @@ public class BacCalculatorFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // Set the Title of the Action
         getActivity().setTitle(title);
 
         weightDisplay = binding.weightDisplay;
         numDrinkDisplay = binding.numDrinkDisplay;
         bacLevel = binding.bacLevel;
 
+        // Initial Display
         weightDisplay.setText(getResources().getString(R.string.weight_display));
         bacLevel.setText(getResources().getString(R.string.BAC_num));
 
+        // Allow the interface to listen to click events
         binding.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -130,28 +136,38 @@ public class BacCalculatorFragment extends Fragment {
         });
     }
 
+    // When returning to the BAC Calculator Fragment, update the UI as nededed base on given
+    // changes
     @Override
     public void onResume() {
         super.onResume();
         getActivity().setTitle(getResources().getString(R.string.app_name));
 
+        // A profile is created only when weight and gender is set
+        // The profile is default at 0, so any changes will indicate there is a profile set
         if (profile.weight > 0){
+            // Displays the weight and gender of the profile
             String weightGender;
             weightGender = profile.weight + " lbs (" + profile.gender + ")";
             weightDisplay.setText(weightGender);
         }
 
+        // If there is a drink in the ArrayList, update the BAC UI
         if (drinks.size() > 0) {
             bac = calculateBAC(profile, drinks);
             updateBacUI(bac);
         }
 
+        // Display the number of drinks
         numDrinkDisplay.setText(String.valueOf(drinks.size()));
 
+        // If a profile is set, then the "View Drinks button" is enabled
         if (enableViewDrinks) {
             binding.viewDrinksButton.setEnabled(true);
         }
 
+        // If a profile is set the "Add Drink" button becomes enabled
+        // If the BAC Level falls below 0.25, the "Add Drink" button will be enabled
         if (enableAddDrink) {
             binding.addDrinkButton.setEnabled(true);
         }
@@ -190,7 +206,7 @@ public class BacCalculatorFragment extends Fragment {
     }
 
     /**
-     * Used to unlock the Add Drink and View Drinks buttons
+     * Used to unlock the Add Drink and View Drinks buttons under a certain condition
      */
     public void unlockButtons(){
         this.enableViewDrinks = true;
@@ -221,7 +237,9 @@ public class BacCalculatorFragment extends Fragment {
         enableViewDrinks = false;
         enableAddDrink = false;
 
+        // Calls clearUI method
         clearUI();
+
         Log.d("TEST", "onClick: clearUI successful");
         Log.d("TEST", "onClick: Drinks: " + drinks.size() + ", Profile weight: " +
                 profile.weight + ", Profile gender: " + profile.gender);
@@ -229,6 +247,7 @@ public class BacCalculatorFragment extends Fragment {
 
     /**
      * This method clears the UI when setting the profile
+     * Number of drinks, BAC Level, BAC status message
      */
     public void clearUI(){
         // Clear Drinks List
@@ -311,13 +330,14 @@ public class BacCalculatorFragment extends Fragment {
             status.setText(getResources().getText(R.string.status3));
             status.setBackgroundColor(getResources().getColor(R.color.red));
 
-            // Once the BAC reaches over 0.25, display Toast Message "No more drinks for you
+            // Once the BAC reaches over 0.25, display Toast Message "No more drinks for you"
             // This will disable the "Add Drink" button
             if (bac >= 0.25) {
                 Toast.makeText(getActivity(), "No more drinks for you.", Toast.LENGTH_LONG).show();
                 enableAddDrinks(false);
                 Log.d("TEST", "updateBacUI: Red successful");
             }
+            // If the bac drops below .25 enable "Add Drink" button
             else {
                 enableAddDrinks(true);
             }

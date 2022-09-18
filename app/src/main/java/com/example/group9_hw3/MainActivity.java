@@ -41,12 +41,19 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
         setContentView(binding.getRoot());
         setTitle("BAC Calculator");
 
+        // Initial Fragment to begin with, the BAC Calculator
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.containerView, BacCalculatorFragment.newInstance("BAC Calculator"), "BAC Calculator Fragment")
                 .addToBackStack(null)
                 .commit();
     }
 
+    /**
+     * This method implements the changeFragmentListener through the various interfaces in the Fragments
+     * included in this project. It communicates with the Main Activity to replace the current Fragment
+     * with the desired Fragment
+     * @param fragment the String parameter that specifies which Fragment to change to
+     */
     @Override
     public void changeFragmentListener(String fragment) {
 
@@ -88,25 +95,48 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
         }
     }
 
+    /**
+     * This method implements the deleteDrink method from ViewDrinksFragment
+     * It receives the Drink object to be deleted from the Arraylist of Drinks
+     * @param drink The Drink object passed on from ViewDrinksFragment
+     */
     @Override
     public void deleteDrink(Drink drink) {
         this.drinks.remove(drink);
     }
 
+    /**
+     * This method implements the emptyList method from ViewDrinksFragment
+     * It receives the drinks list from ViewDrinksFragment and stores it in the Main Activity,
+     * then send the updated drink list to BAC Calculator Fragment
+     * @param drinks ArrayList of Drink objects
+     */
     @Override
     public void emptyList(ArrayList<Drink> drinks) {
+        this.drinks = drinks;
         bacCalculator = (BacCalculatorFragment) getSupportFragmentManager().findFragmentByTag("BAC Calculator Fragment");
-        bacCalculator.updateDrinksList(drinks);
+        bacCalculator.updateDrinksList(this.drinks);
         getSupportFragmentManager().popBackStack();
     }
 
+    /**
+     * This method receives the drink list when the user closes the View Drinks Fragment, stores the
+     * drink list to the Main Activity, and sends the updated ArrayList to BAC Calculator Fragment
+     * @param drinks ArrayList of Drink objects
+     */
     @Override
     public void closeViewDrinks(ArrayList<Drink> drinks) {
+        this.drinks = drinks;
         bacCalculator = (BacCalculatorFragment) getSupportFragmentManager().findFragmentByTag("BAC Calculator Fragment");
-        bacCalculator.updateDrinksList(drinks);
+        bacCalculator.updateDrinksList(this.drinks);
         getSupportFragmentManager().popBackStack();
     }
 
+    /**
+     * This method receives the Profile from SetProfileFragment and stores it in the Main Activity,
+     * then sends it to the BAC Calculator Fragment
+     * @param profile The Profile object used to store the user's weight and gender
+     */
     @Override
     public void sendProfile(Profile profile) {
         this.profile = profile;
@@ -116,6 +146,11 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
         getSupportFragmentManager().popBackStack();
     }
 
+    /**
+     * This method receives the Drink object from AddDrinkFragment and adds it into the drinks
+     * ArrayList in the Main Activity, then updates the BAC Calculator's drink list
+     * @param drink The Drink object to be added to the Main Activity's ArrayList
+     */
     @Override
     public void sendDrink(Drink drink) {
         drinks.add(drink);
@@ -124,6 +159,10 @@ public class MainActivity extends AppCompatActivity implements BacCalculatorFrag
         getSupportFragmentManager().popBackStack();
     }
 
+    /**
+     * This method tells the Main Activity to pop the BackStack to retrieve the last Fragment
+     * in the stack
+     */
     @Override
     public void cancel() {
         getSupportFragmentManager().popBackStack();

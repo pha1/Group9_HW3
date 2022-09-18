@@ -103,6 +103,7 @@ public class AddDrinkFragment extends Fragment {
         progress = binding.viewProgress;
 
         drink_size_group = binding.drinkSizeGroup;
+        // Default drink size option
         drinkSize = 1;
 
         // When the user clicks on a new size, the drink size is updated
@@ -130,6 +131,7 @@ public class AddDrinkFragment extends Fragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             // As the seekbar is used, the percentage displayed is updated
+            // Sets the Drink object's alcohol percentage value
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 progress.setText(i + "%");
                 alcohol_percentage = (double)i/100.0;
@@ -149,6 +151,8 @@ public class AddDrinkFragment extends Fragment {
         binding.addDrinkButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Create a date and time stamp for the object as it is created
                 calendar = Calendar.getInstance();
                 simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss aa");
                 date = simpleDateFormat.format(calendar.getTime());
@@ -162,6 +166,7 @@ public class AddDrinkFragment extends Fragment {
             }
         });
 
+        // Listener for cancel button
         binding.cancelButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

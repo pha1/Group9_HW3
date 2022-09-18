@@ -72,6 +72,7 @@ public class ViewDrinksFragment extends Fragment {
         if (getArguments() != null) {
             drinks = getArguments().getParcelableArrayList(ARG_PARAM_DRINKS);
         }
+        getActivity().setTitle(getResources().getString(R.string.view_drinks));
     }
 
     FragmentViewDrinkBinding binding;
@@ -110,6 +111,7 @@ public class ViewDrinksFragment extends Fragment {
                     current++;
                     drink = drinks.get(current);
                 }
+                // Update UI based on new drink position
                 updateUI();
             }
         });
@@ -124,21 +126,29 @@ public class ViewDrinksFragment extends Fragment {
 
                 Log.d("TEST", "onClick: Number of drinks: " + drinks.size());
 
+                // AFTER REMOVING THE DRINK, CHECK THE ARRAY TO SEE IF THERE ARE MORE DRINKS
+
                 // If there are drinks in the list
                 if (drinks.size() > 0) {
+                    // One drink left, set current to 0 index
                     if (drinks.size() ==  1) {
                         current = 0;
+                        // If there are more than one drink left
                     } else if (drinks.size() > 1) {
+                        // If the current drink is the first drink, show the last
                         if (current == 0) {
                             current = drinks.size() - 1;
+                            // Show the previous drink
                         } else {
                             current--;
                         }
                     }
                     drink = drinks.get(current);
+                    // Update UI based on new drink position
                     updateUI();
                 }
                 // If there are no drinks in the list
+                // Send the updated drink list (empty list)
                 else {
                     mListener.emptyList(drinks);
                 }
@@ -162,6 +172,7 @@ public class ViewDrinksFragment extends Fragment {
                     current--;
                     drink = drinks.get(current);
                 }
+                // Update the UI based on new position
                 updateUI();
             }
         });
@@ -175,6 +186,9 @@ public class ViewDrinksFragment extends Fragment {
         });
     }
 
+    /**
+     * Update the TextView values to the new position
+     */
     public void updateUI(){
 
         currentDrink = binding.textviewCurrentDrink;

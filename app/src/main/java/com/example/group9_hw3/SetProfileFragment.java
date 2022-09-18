@@ -1,3 +1,10 @@
+/**
+ * Homework 3
+ * Group9_HW3
+ * Phi Ha
+ * Srinath Dittakavi
+ */
+
 package com.example.group9_hw3;
 
 import android.content.Context;
@@ -113,7 +120,12 @@ public class SetProfileFragment extends Fragment {
                         throw new IllegalArgumentException();
                     }
 
+                    // Create the profile if conditions are met
                     Profile profile = new Profile(gender, weight);
+
+                    // If made it here, the profile was successfully created
+                    // Used as a breaking point when sending the profile to see where the error
+                    // was occurring
                     Log.d("TEST", "onClick: Profile created");
 
                     // Send profile to Main Activity
